@@ -1,0 +1,45 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        double[] array = { 3.14, 1.618, 2.718, 0.577, 1.732 };
+        QuickSort(array, 0, array.Length - 1);
+        Console.WriteLine("Sorted array:");
+        foreach (double num in array)
+        {
+            Console.WriteLine(num);
+        }
+    }
+
+    static void QuickSort(double[] arr, int left, int right)
+    {
+        if (left < right)
+        {
+            int pivotIndex = Partition(arr, left, right);
+            QuickSort(arr, left, pivotIndex - 1);
+            QuickSort(arr, pivotIndex + 1, right);
+        }
+    }
+
+    static int Partition(double[] arr, int left, int right)
+    {
+        double pivot = arr[right];
+        int i = left - 1;
+        for (int j = left; j < right; j++)
+        {
+            if (arr[j] < pivot)
+            {
+                i++;
+                double temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        double temp1 = arr[i + 1];
+        arr[i + 1] = arr[right];
+        arr[right] = temp1;
+        return i + 1;
+    }
+}
